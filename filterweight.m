@@ -6,12 +6,17 @@ function weight = filterweight(centre, d, x)
     % filter weight is 1 at centre, 0 at centre +- d, triangular
     % shape
     % what is the weight of the filter at position x?
-    if x < centre && x > centre - d
-        weight = (x - (centre - d)) / d;
-    elseif x >= centre && x < centre + d
-        weight = ((centre + d) - x) / d;
-    else
-        weight = 0;
-    end
+    %if x < centre && x > centre - d
+        %weight = (x - (centre - d)) / d;
+    %elseif x >= centre && x < centre + d
+        %weight = ((centre + d) - x) / d;
+    %else
+        %weight = 0;
+    %end
+
+    % vectorized
+
+    weight = ((x < centre & x > centre - d) .* (x - (centre - d))
+           + (x >= centre & x < centre + d) .* ((centre + d) - x)) / d;
 end
     

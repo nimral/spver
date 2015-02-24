@@ -24,6 +24,9 @@ nbands = floor(hz2mel(8000) / d) - 1;
 % matrix, in each row will be the mel-frequency bands for one time window
 bands = zeros(size(windows, 1), nbands);
 
+% compute the pitch of centres of frequency bands
+mel_centres = hz2mel(binsize/2 + ((1:160)-1) * binsize);
+
 for w = 1:size(windows, 1)
     window = windows(w, :);
 
@@ -35,21 +38,15 @@ for w = 1:size(windows, 1)
     % y is complex, we want the energies of individual frequencies
     y = abs(y);
 
+
     for i = 1:nbands
         
         % centre of the filter
         centre = d * i;
 
-        % for each frequency band (from fft)
-        for j = 1:length(y)
-
-            % compute the pitch of *its* centre
-            x = hz2mel(binsize/2 + (j-1) * binsize);
-
-            % add its amplitude filtered by a triangular filter centered at
-            % centre to the corresponding band
-            bands(w, i) += filterweight(centre, d, x) * y(j);
-        end
+        % add its amplitude filtered by a triangular filter centered at
+        % centre to the corresponding band
+        bands(w, i) += filterweight(centre, d, mel_centres) * y';
     end
 end
 
