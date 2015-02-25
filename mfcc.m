@@ -1,7 +1,10 @@
 % compute log mel-frequncy bands for whole wav file
 
 filename = '3_cuave09_019.wav';
-sound = wavread(filename);
+snd = wavread(filename);
+
+% Pre-emphasis is done in order to emphasize higher frequencies.
+sound = preemphasis(snd);
 
 % split into windows of 20 ms each, 10 ms overlap
 % fs = 16000 Hz
@@ -30,7 +33,15 @@ mel_centres = hz2mel(binsize/2 + ((1:160)-1) * binsize);
 for w = 1:size(windows, 1)
     window = windows(w, :);
 
-    y = fft(window);
+    % Maybe we should consider doing onw more step here
+    % (suggested in a paper on feature extraction):
+    % Usually the frame is multiplied by a smooth window
+    % function (e.g. Hamming) prior to further steps (fft). 
+    % A smooth windowing function is applied because of
+    % the problems fft has with finite length vectors.
+    wdw = transpose(hamming(length(window))).*window;
+
+    y = fft(wdw);
     
     % window is a real vector, we are interested only in the first half of fft
     y = y(1:length(y) / 2);
@@ -52,5 +63,10 @@ end
 
 % not sure why
 bands = log(bands);
+% bar(bands(1, :))
 
-%bar(bands(1, :))
+% apply DCT on the individual bands to get the cepstral coefficients
+% TODO
+
+% Add delta and delta-delta cepstra to the final vectors
+% TODO
