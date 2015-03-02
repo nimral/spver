@@ -67,7 +67,7 @@ function y = mfcc(filename)
     % bar(bands(1, :))
 
     % apply DCT on the individual bands to get the cepstral coefficients
-    coef = dct(bands')'
+    coef = dct(bands')';
 
     % take only a few first coefficients (12-15 is recommended)
     M = 15;
