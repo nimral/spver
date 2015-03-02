@@ -32,8 +32,7 @@ function y = dtw(A, B)
                 upperleft = tab(a-1, b-1);
             end
 
-            tab(a, b) = distance(A(a, :), B(b, :));
-            tab(a, b) += min([upper, left, upperleft]);
+            tab(a, b) = distance(A(a, :), B(b, :)) + min([upper, left, upperleft]);
         end
     end
 

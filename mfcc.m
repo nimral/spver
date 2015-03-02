@@ -58,7 +58,7 @@ function y = mfcc(filename)
 
             % add its amplitude filtered by a triangular filter centered at
             % centre to the corresponding band
-            bands(w, i) += filterweight(centre, d, mel_centres) * y';
+            bands(w, i) = bands(w, i) + filterweight(centre, d, mel_centres) * y';
         end
     end
 

@@ -16,7 +16,6 @@ function weight = filterweight(centre, d, x)
 
     % vectorized
 
-    weight = ((x < centre & x > centre - d) .* (x - (centre - d))
-           + (x >= centre & x < centre + d) .* ((centre + d) - x)) / d;
+    weight = ((x < centre & x > centre - d) .* (x - (centre - d)) + (x >= centre & x < centre + d) .* ((centre + d) - x)) / d;
 end
     
