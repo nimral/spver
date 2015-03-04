@@ -32,11 +32,18 @@ function y = dtw(A, B)
                 upperleft = tab(a-1, b-1);
             end
 
-            tab(a, b) = distance(A(a, :), B(b, :)) + min([upper, left, upperleft]);
+            % weight coefficient -- manhattan distance from last point
+            w = 1;
+            if upperleft < min([upper, left])
+                w = 2;
+            end
+
+            tab(a, b) = w * distance(A(a, :), B(b, :)) + min([upper, left, upperleft]);
         end
     end
 
     % value of the best alignment of the two sequences
-    y = tab(lA, lB);
+    % normalized
+    y = tab(lA, lB) / (lA + lB);
 end
 

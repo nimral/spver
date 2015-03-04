@@ -70,7 +70,7 @@ function y = mfcc(filename)
     coef = dct(bands')';
 
     % take only a few first coefficients (12-15 is recommended)
-    M = 15;
+    M = 11;
     coef = coef(:, 1:M);
 
     % Add delta and delta-delta cepstra to the final vectors
