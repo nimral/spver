@@ -15,7 +15,7 @@ function [threshold, fnr]  = threshold(users, intruders, fpr)
     index = floor(length(intruders) * fpr);
     threshold = 0;
     if index > 0
-        threshold = intruders(index)
+        threshold = intruders(index);
     end
     if index < length(intruders)
         threshold = threshold + intruders(index+1);

@@ -13,7 +13,7 @@ delay_constant=.4;
 
 fs=16000;
 bits=24;
-stereo=1; 
+stereo=1;
 channel=1;
 
 
@@ -24,16 +24,16 @@ recobj = audiorecorder(fs,bits,stereo,channel);
 record(recobj); pause(delay_constant)
 % stop(recobj);
 
-fprintf('say %d in:\n3\n',digit); %sound(start_signal,mario_fs); 
+fprintf('say %d in:\n3\n',digit); %sound(start_signal,mario_fs);
 pause(delay_constant);
-disp('2'); %sound(start_signal,mario_fs); 
+disp('2'); %sound(start_signal,mario_fs);
 pause(delay_constant);
-disp('1'); %sound(start_signal,mario_fs); 
+disp('1'); %sound(start_signal,mario_fs);
 pause(delay_constant);
 % record(recobj);
 disp('talk');
 pause(1.5); %CHANGE NUMBER OF SECONDS TO RECORD HERE
-disp('done talking'); stop(recobj);% sound(stop_signal,mario_fs); 
+disp('done talking'); stop(recobj);% sound(stop_signal,mario_fs);
 
 % return normalized samples
 T=getaudiodata(recobj); T=T(round(fs*4*delay_constant):length(T));
