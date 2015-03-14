@@ -11,7 +11,8 @@ function database = create_database()
                 digit = 10;
             end
 
-            listings = dir(strcat('../audio_data/labeled/AdamJonatanMatej/', names{n}, '_recording_', int2str(digit), '_*.wav'));
+            % dig != digit
+            listings = dir(strcat('../audio_data/labeled/AdamJonatanMatej/', names{n}, '_recording_', int2str(dig), '_*.wav'));
             i = 1;
             for file = listings'
                 database{n}{digit}{i} = mfcc(file.name);
@@ -21,6 +22,25 @@ function database = create_database()
     end
 
     n = length(names)+1;
+    for dig = 0:9
+        digit = dig;
+        if digit == 0
+            digit = 10;
+        end
+
+        dirname = '../audio_data/labeled/from-TIDIGITS/';
+        
+        % dig != digit
+        listings = dir(strcat(dirname, '*_', int2str(dig), '*wav'));
+
+        i = 1;
+        for file = listings'
+            database{n}{digit}{i} = mfcc(strcat(dirname, file.name));
+            i = i+1;
+        end
+    end
+
+    n = n+1;
     for dig = 0:9
         digit = dig;
         if digit == 0
