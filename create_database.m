@@ -51,7 +51,8 @@ function database = create_database()
 
         dirname = '../audio_data/labeled/Cuave/';
         
-        listings = dir(strcat(dirname, int2str(digit), '*wav'));
+        % dig != digit
+        listings = dir(strcat(dirname, int2str(dig), '*wav'));
 
         i = 1;
         for file = listings'
