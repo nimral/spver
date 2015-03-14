@@ -11,11 +11,13 @@ function database = create_database()
                 digit = 10;
             end
 
+            dirname = '../audio_data/labeled/AdamJonatanMatej/';
+
             % dig != digit
-            listings = dir(strcat('../audio_data/labeled/AdamJonatanMatej/', names{n}, '_recording_', int2str(dig), '_*.wav'));
+            listings = dir(strcat(dirname, names{n}, '_recording_', int2str(dig), '_*.wav'));
             i = 1;
             for file = listings'
-                database{n}{digit}{i} = mfcc(file.name);
+                database{n}{digit}{i} = mfcc(strcat(dirname, file.name));
                 i = i+1;
             end
         end
