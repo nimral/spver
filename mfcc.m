@@ -73,17 +73,15 @@ function y = mfcc(filename)
     M = 11;
     coef = coef(:, 1:M);
 
-	% Coefficient Liftering.
-	% The higher order cepstral coefficients tend to be numerically small compared
-	% to the lower order c.c. The following code rescales the coefficients.
-	% Found at: http://research.ijcaonline.org/volume40/number3/pxc3877167.pdf
-	% Anyone with some Matlab skills please optimize the code.
-	[rows,cols] = size(coef);
-	for i = 1:rows
-		for j = 1:cols
-			coef(i,j) = (1 + (M / 2) * sin((pi * j) / M)) * coef(i,j);
-		end
-	end
+    % Coefficient Liftering.
+    % The higher order cepstral coefficients tend to be numerically small compared
+    % to the lower order c.c. The following code rescales the coefficients.
+    % Found at: http://research.ijcaonline.org/volume40/number3/pxc3877167.pdf
+    % Anyone with some Matlab skills please optimize the code.
+    [rows,cols] = size(coef);
+    for j = 1:cols
+        coef(:, j) = (1 + (M / 2) * sin((pi * j) / M)) * coef(:, j);
+    end
 
     % Add delta and delta-delta cepstra to the final vectors
     delta1 = [zeros(1, M) ; coef(2:end, :) - coef(1:end-1, :)];
