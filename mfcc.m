@@ -87,5 +87,8 @@ function y = mfcc(filename)
     delta1 = [zeros(1, M) ; coef(2:end, :) - coef(1:end-1, :)];
     delta2 = [zeros(1, M) ; delta1(2:end, :) - delta1(1:end-1, :)];
 
-    y = [coef delta1 delta2];
+    % y = [coef delta1 delta2];
+	% I found this again in: http://research.ijcaonline.org/volume40/number3/pxc3877167.pdf
+	% where the author claims he obtained better results and it also sped up the computation.
+    y = coef + 0.6 * delta1 + 0.3 * delta2;
 end
