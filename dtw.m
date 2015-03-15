@@ -10,7 +10,12 @@ function [y, path] = dtw(A, B)
     tab = zeros(lA, lB) + Inf;
 
     tab(1,1) = distance(A(1, :), B(1, :));
-    tol = 0.2;
+
+	% Here we have to be very careful. If we are not going to detect the silence,
+	% then we have to be more tolerant, because we don't know when, during the
+	% aprox 2s time window, the speaker is going to start speaking. Therefore,
+	% I suggest to increase the tolerance.
+    tol = 0.4;
 
 
     % first row
