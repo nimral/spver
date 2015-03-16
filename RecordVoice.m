@@ -7,8 +7,8 @@
 function f = RecordVoice(person, digit,number, notsave)
 delay_constant=.4;
 % USING MARIO SOUNDS FOR BEGIN/END RECORD (need 2 mario files)
-% start_signal=wavread('mario_jump');
-% stop_signal=wavread('mario_pipe');
+% start_signal=audioread('mario_jump');
+% stop_signal=audioread('mario_pipe');
 % mario_fs=48000;
 
 fs=16000;

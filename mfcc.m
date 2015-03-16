@@ -3,7 +3,7 @@ function y = mfcc(filename,sound_signal)
 
     %filename = '3_cuave09_019.wav';
 	if nargin == 1
-	    snd = wavread(filename);
+	    snd = audioread(filename);
 	else
 		snd = sound_signal;
 	end
