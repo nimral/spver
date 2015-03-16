@@ -4,7 +4,7 @@
 % returns vector of samples
 
 
-function f = RecordVoice(person, digit,number)
+function f = RecordVoice(person, digit,number, notsave)
 delay_constant=.4;
 % USING MARIO SOUNDS FOR BEGIN/END RECORD (need 2 mario files)
 % start_signal=wavread('mario_jump');
@@ -40,9 +40,12 @@ T=getaudiodata(recobj); T=T(round(fs*4*delay_constant):length(T));
 T=T(:,1); T=T./(max(T)*1.05);
 f=T;
 
-wav_name = sprintf('%s_recording_%d_%d', person,digit,number);
 
-wavwrite(T,fs,bits,wav_name);
+if nargin == 3
+	wav_name = sprintf('%s_recording_%d_%d', person,digit,number);
+	
+	wavwrite(T,fs,bits,wav_name);
+end
 
 % % % below is the code for RecordVoice without mario sounds
 
