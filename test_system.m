@@ -13,7 +13,7 @@ for dig = 1:10
         nXn = inner_distances(database{n}{dig});
 
         nXothers = [];
-        for o = 1:4
+        for o = 1:3
             if o == n
                 continue;
             end

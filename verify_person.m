@@ -13,6 +13,8 @@ id.('matej') = 3;
 database = load('database.mat');
 database = database.database;
 
+thresholds = load('thresholds.mat');
+
 claimed_person = input('Please enter your name:', 's');
 
 % Reject an unknown person early and exit
@@ -45,18 +47,18 @@ for i = 1:query_cnt
 % 	sample = audioread('../audio_data/labeled/AdamJonatanMatej/adam_recording_0_3.wav');
 
 	% Create a cell array accepted as a parameter by the distance fnc
-	feats = {};
+	features = {};
 	% Extract the features from sample
-	feats{1} = mfcc('', sample);
+	features{1} = mfcc('', sample);
 
 	% Query the database with id = claimed_id and digit = dig
 	% and retrieve the threshold (for given (speaker, digit) pair)
-	threshold = 1.7;
+	threshold = thresholds(digindex, claimed_id);
 	
 	% Now compute the distance between the recorded sample
 	% and all the samples in the database and compute the
 	% (average) distance
-	dists = distances(database{claimed_id}{digindex}, feats);
+	dists = distances(database{claimed_id}{digindex}, features);
 	avg_dist = mean(dists);
 	
 	% If distance distance is above threshold increase err_cnt
