@@ -41,20 +41,20 @@ for i = 1:query_cnt
     end
 
 	% Ask the user to utter the digit dig in 3,2,1 and go
-	%sample = RecordVoice('',dig,-1,1);
-	sample = audioread('../audio_data/labeled/AdamJonatanMatej/adam_recording_0_3.wav');
+	sample = RecordVoice('', dig,-1,1);
+% 	sample = audioread('../audio_data/labeled/AdamJonatanMatej/adam_recording_0_3.wav');
 
 	% Create a cell array accepted as a parameter by the distance fnc
 	feats = {};
 	% Extract the features from sample
-	feats{1} = mfcc('',sample);
+	feats{1} = mfcc('', sample);
 
 	% Query the database with id = claimed_id and digit = dig
 	% and retrieve the threshold (for given (speaker, digit) pair)
-	threshold = 1.3;
+	threshold = 1.7;
 	
 	% Now compute the distance between the recorded sample
-	% and all the samples in the database and compute the 
+	% and all the samples in the database and compute the
 	% (average) distance
 	dists = distances(database{claimed_id}{digindex}, feats);
 	avg_dist = mean(dists);
@@ -69,7 +69,7 @@ end
 if err_cnt <= max_err_cnt
     fprintf('Welcome, %s!', claimed_person);
 else
-    disp('Sorry, you are not allowed access');
+    disp('You good sir, are a fraud!');
 end
 
 end

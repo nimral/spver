@@ -6,7 +6,7 @@ fpr = 0.05;
 thresholds = zeros(10, 3);
 fnrs = zeros(10, 3);
 
-parfor dig = 1:10
+for dig = 1:10
     fprintf('starting digit %d\n', dig);
     for n = 1:3
         fprintf('user %d\n', n);

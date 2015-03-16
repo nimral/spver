@@ -1,21 +1,24 @@
 % compute log mel-frequncy bands for whole wav file
-function y = mfcc(filename,sound_signal)
+function y = mfcc(filename, sound_signal)
 
     %filename = '3_cuave09_019.wav';
 	if nargin == 1
 	    snd = audioread(filename);
 	else
 		snd = sound_signal;
-	end
+    end
 
+    % remove starting and trailing silence
+    snd = chop_voice(snd);
+    
     % Pre-emphasis is done in order to emphasize higher frequencies.
-    sound = preemphasis(snd);
+    snd2 = preemphasis(snd);
 
     % split into windows of 20 ms each, 10 ms overlap
     % fs = 16000 Hz
     % 1000 ms ~ 16000 samples
     % 20 ms ~ 320 samples
-    windows = sound2windows(sound, 20, 10, 16000);
+    windows = sound2windows(snd2, 20, 10, 16000);
 
     % after fft:
     % 320/2 = 160 bins ~ 8000 Hz (half of the samplerate)
