@@ -1,8 +1,12 @@
 % compute log mel-frequncy bands for whole wav file
-function y = mfcc(filename)
+function y = mfcc(filename,sound_signal)
 
     %filename = '3_cuave09_019.wav';
-    snd = wavread(filename);
+	if nargin == 1
+	    snd = wavread(filename);
+	else
+		snd = sound_signal;
+	end
 
     % Pre-emphasis is done in order to emphasize higher frequencies.
     sound = preemphasis(snd);
