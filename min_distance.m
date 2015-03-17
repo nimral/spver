@@ -2,7 +2,7 @@
 function y = min_distance(a, digits)
     m = Inf;
     for i = 1:length(digits)
-        m = min(m, dtw(a, digits{i});
+        m = min(m, dtw(a, digits{i}));
     end
     y = m;
 end

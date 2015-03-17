@@ -14,6 +14,7 @@ database = load('database.mat');
 database = database.database;
 
 thresholds = load('thresholds.mat');
+thresholds = thresholds.thresholds;
 
 claimed_person = input('Please enter your name:', 's');
 
@@ -43,7 +44,7 @@ for i = 1:query_cnt
     end
 
 	% Ask the user to utter the digit dig in 3,2,1 and go
-	sample = RecordVoice('', dig,-1,1);
+	sample = RecordVoice('', dig, -1, 1);
 % 	sample = audioread('../audio_data/labeled/AdamJonatanMatej/adam_recording_0_3.wav');
 
 	% Create a cell array accepted as a parameter by the distance fnc
