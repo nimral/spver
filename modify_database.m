@@ -1,3 +1,5 @@
+% Takes a database with three speakers and returns a new one split into halves
+
 function y = modify_database(database)
 names = {'adam', 'jonatan', 'matej'};
 new = {};
@@ -23,8 +25,6 @@ for n = 1:length(names)
         end
     end
 end
-%database = new;
 y = new;
 
-%save('database.mat', 'database');
 end
