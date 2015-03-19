@@ -16,7 +16,7 @@ end
 start_point=1;
 for i=1:size(testwins,1)-1
     if (meanvalues(i+1)/meanvalues(i)) > threshold
-        start_point=max(i-1,1)
+        start_point=max(i-1,1);
         break;
     end
 end
@@ -25,10 +25,15 @@ maxlength=size(testwins,1);
 end_point=maxlength;
 for i=0:maxlength-2
     if meanvalues(maxlength-i-1)/meanvalues(maxlength-i) > threshold
-        end_point=min(maxlength-i+1,maxlength)
+        end_point=min(maxlength-i+1,maxlength);
         break;
     end
 end
-chopped_file=unchopped_file(max(1,window_size*(start_point-1)/1000*fs):window_size*end_point/1000*fs);
+
+if end_point < start_point
+    chopped_file = unchopped_file;
+else
+    chopped_file=unchopped_file(max(1,window_size*(start_point-1)/1000*fs):window_size*end_point/1000*fs);
+end
 end
 

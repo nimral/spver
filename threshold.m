@@ -22,7 +22,7 @@ function [thr, fnr, fpr]  = threshold(users, intruders, max_allowed_fpr)
     sorted = sortrows([intruders ; users]);
     lSorted = lIntruders + lUsers;
 
-    thr = 0.0;
+    thr = sorted(1, 1) / 2;
     fpr = 0.0;
     fnr = 1.0;
     past_users = 0;
